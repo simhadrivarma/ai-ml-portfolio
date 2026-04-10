@@ -1,34 +1,37 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# More realistic student dataset
-data = {
-    "Name": ["Rahul", "Anita", "Kiran", "Sneha", "Arjun"],
-    "Math": [78, 92, 85, 60, 88],
-    "Science": [82, 89, 80, 65, 90],
-    "English": [75, 95, 78, 70, 85]
-}
+# 1. Load data from CSV 
+try:
+    df = pd.read_csv("students.csv")
+    print("✅ Data loaded successfully!\n")
+except FileNotFoundError:
+    print("❌ Error: students.csv not found.")
 
-df = pd.DataFrame(data)
-
-# Calculate total and average marks
+# 2. Advanced Analysis
 df["Total"] = df[["Math", "Science", "English"]].sum(axis=1)
-df["Average"] = df["Total"] / 3
+df["Average"] = (df["Total"] / 3).round(2)
 
-# Find topper
+# 3. Insights (The 'Smart' part)
 topper = df.loc[df["Total"].idxmax()]
+lowest = df.loc[df["Total"].idxmin()]
 
-print("📊 Student Data:\n")
+print("📊 --- STUDENT REPORT CARD ---")
 print(df)
+print("\n🏆 TOPPER OF THE CLASS:")
+print(f"Name: {topper['Name']} | Total: {topper['Total']} | Avg: {topper['Average']}%")
 
-print("\n🏆 Topper:")
-print(topper["Name"], "with total marks:", topper["Total"])
+print("\n📉 NEEDS IMPROVEMENT:")
+print(f"Name: {lowest['Name']} | Total: {lowest['Total']}")
 
-# Plot marks comparison
-df.set_index("Name")[["Math", "Science", "English"]].plot(kind="bar")
-plt.title("Student Marks Comparison")
-plt.xlabel("Students")
+# 4. Professional Visualization
+df.set_index("Name")[["Math", "Science", "English"]].plot(kind="bar", figsize=(10, 6))
+plt.title("Subject-wise Marks Comparison", fontsize=14)
 plt.ylabel("Marks")
-plt.xticks(rotation=0)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
+
+# Save the graph as an image
+plt.savefig("marks_chart.png")
+print("\n🎨 Graph has been generated and saved as 'marks_chart.png'")
 plt.show()
