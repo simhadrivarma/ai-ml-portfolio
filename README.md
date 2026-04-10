@@ -29,4 +29,4 @@ To become a skilled AI/ML Engineer and earn through freelancing.
 ---
 
 ## 📫 Contact
-- Email: your-email@gmail.com
+- Email: simhadrivarmattc@gmail.com
