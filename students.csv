@@ -1,4 +1,4 @@
-Name,Math,Science,English
+csv_data = """Name,Math,Science,English
 Rahul,78,82,75
 Anita,92,89,95
 Kiran,85,80,78
@@ -6,3 +6,9 @@ Sneha,60,65,70
 Arjun,88,90,85
 Priya,91,87,93
 Ravi,72,68,74
+"""
+
+with open("students.csv", "w") as f:
+    f.write(csv_data)
+
+print("Created students.csv with the provided data.")
